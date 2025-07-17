@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameManagement
 {
@@ -7,10 +8,11 @@ namespace GameManagement
         public static GameManager Instance { get; private set; }
 
         [SerializeField] private GameObject[] nodes;
+        [SerializeField] private GameObject spawnResourceButton;
         [SerializeField] private GameObject resource;
 
-        public delegate void SpawnResourceHandler();
-        public event SpawnResourceHandler OnSpawnResource = delegate { SpawnResource(); };
+        //public delegate void SpawnResourceHandler();
+        //public event SpawnResourceHandler OnSpawnResource += SpawnResource;
 
 
         private void Awake()
@@ -29,7 +31,7 @@ namespace GameManagement
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-
+            spawnResourceButton.GetComponent<Button>().onClick.AddListener(SpawnResource);
         }
 
         // Update is called once per frame
@@ -39,9 +41,11 @@ namespace GameManagement
         }
 
 
-        private static void SpawnResource()
+        private void SpawnResource()
         {
-            GameObject resource = Instantiate(resource);
+            GameObject resourceObj;
+            if(resource != null)
+                resourceObj = Instantiate(resource);
         }
     }
 }
