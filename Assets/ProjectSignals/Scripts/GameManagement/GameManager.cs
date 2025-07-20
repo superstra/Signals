@@ -31,7 +31,7 @@ namespace GameManagement
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            spawnResourceButton.GetComponent<Button>().onClick.AddListener(SpawnResource);
+            spawnResourceButton.GetComponent<Button>().onClick.AddListener(StartFungiRound);
         }
 
         // Update is called once per frame
@@ -43,9 +43,16 @@ namespace GameManagement
 
         private void SpawnResource()
         {
+
             GameObject resourceObj;
             if(resource != null)
                 resourceObj = Instantiate(resource);
+        }
+
+        private void StartFungiRound()
+        {
+            Transform location = nodes[0].transform;
+            SpawnResource();
         }
     }
 }
